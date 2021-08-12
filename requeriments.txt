@@ -2,7 +2,8 @@ beautifulsoup4==4.8.2
 certifi==2019.11.28
 chardet==3.0.4
 idna==2.9
-pkg-resources==0.0.0
+numpy==1.21.1
+pkg_resources==0.0.0
 requests==2.23.0
 selenium==3.141.0
 soupsieve==2.0

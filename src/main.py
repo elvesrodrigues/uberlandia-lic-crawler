@@ -10,7 +10,7 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 
 API_URL = 'https://app.powerbi.com/view?r=eyJrIjoiMzk4ZWFhYmYtMjdjMC00Yzk4LTkxNTAtNzM2MzM0YTAwYWE0IiwidCI6IjdmNWY0YjY0LTcwZDAtNDMwZi1iMDc2LWE0ODg2MmI4NjUxOCJ9'
-SEL_IFRAME = '.visual-container-component:nth-child(9)'
+SEL_IFRAME = '.visual-container-component:nth-child(8)'
 
 COLS_SELECTOR = ':root > div > div'
 CELL_SELECTOR = '.pivotTableCellWrap'
@@ -47,12 +47,15 @@ class Crawler:
 
         num_rows = len(links)
         for row in range(num_rows):
-            process_number = data[row][0]
-            self.processes[process_number] = {
-                'link': links[row],
-                'data': data[row][1:]
-            } 
-
+            try:
+                process_number = data[row][0]
+                self.processes[process_number] = {
+                    'link': links[row],
+                    'data': data[row][1:]
+                } 
+            except:
+                pass
+            
     def start(self):
         self.driver.get(API_URL)
         time.sleep(15)
