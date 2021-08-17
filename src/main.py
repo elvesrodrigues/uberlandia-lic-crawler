@@ -66,16 +66,20 @@ class Crawler:
         count = 0
         last_num_processes = 0
 
+        # move a tabela para a direita, para ela ter todas colunas
         for _ in range(100):
-            content.send_keys(Keys.ARROW_RIGHT)
+            iframe.send_keys(Keys.ARROW_RIGHT)
 
+        # Move a tabela para baixo enquanto tiver conteúdo novo, realizando o parsing do conteúdo renderizado
         while count < 13:
             content.send_keys(Keys.PAGE_DOWN)
             time.sleep(1.5)
 
+            # Processa o conteúdo renderizado
             body = content.get_attribute('innerHTML')
             self.parser(body)
 
+            # Verifica que houve conteúdo novo renderizado
             print(f'> {last_num_processes}, {len(self.processes)}')
             if last_num_processes == len(self.processes):
                 count += 1
